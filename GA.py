@@ -11,7 +11,7 @@ env = gym.make("LunarLander-v2")
 
 class Genetic_Algorithm():
 
-    def __init__(self, N=100, pcross=0.6, pmut=0.1, sigma=0.1, n_tour=4, n_iter=200, num_exp=20, bounds=[-1, 1]):
+    def __init__(self, N=100, pcross=0.6, pmut=0.1, sigma=0.1, n_tour=4, n_iter=200, num_exp=20, bounds=[-1, 1], verbose=True):
         self.MLP = MLP([8, 6, 4])
         self.chromosome_len = len(self.MLP.to_chromosome())
         self.N = N  # Tamaño de la población
@@ -23,6 +23,7 @@ class Genetic_Algorithm():
         self.n_tour = n_tour  # Número de participantes en el torneo
         self.n_iter = n_iter  # Numero de iteraciones
         self.num_exp = num_exp  # Número de experimentos por individuo
+        self.verbose = verbose  # Imprimir resultados
 
     #############################
     #######     INIT      #######
@@ -214,8 +215,8 @@ class Genetic_Algorithm():
 
     def evolve(self):
         """Evoluciona la población usando algoritmo genético."""
-
-        self.log_params(file_path="evolution_log.txt")
+        if self.verbose:
+            self.log_params(file_path="evolution_log.txt")
 
         fitness_list = [self.fitness(chromosome) for chromosome in self.pop]
 
@@ -246,7 +247,7 @@ class Genetic_Algorithm():
                 best_fitness = max(fitness_list)
 
             # Seleccionar los N mejores individuos
-            if generation % 10 == 0:
+            if self.verbose and (generation % 10 == 0):
                 print("Generación", generation, "Fitness", max(fitness_list))
                 print("Mejor fitness: ", best_fitness,
                       " Cromosoma: ", best_chromosome)
