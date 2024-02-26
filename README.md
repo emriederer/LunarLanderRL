@@ -1,2 +1,5 @@
-# GeneticRL
-Genetic algorithm to select the weights of a MLP to play lunar lander using Reinforcement Learning.
+# Lunar Lander Reinforcement Learning
+Different methods to apply Reinforcement Learning to Atari's game 'Lunar Lander'. These include:
+- Neuroevolution
+- DQN
+- DDQN
