@@ -189,6 +189,7 @@ class Genetic_Algorithm():
         plt.title('Fitness Evolution Over Generations')
         plt.legend()
         plt.grid(True)
+        plt.ylim(-400, 300)
         plt.show()
 
     def log_generation_info(self, generation, fitness_list, best_fitness, best_chromosome, file_path="evolution_log.txt"):
@@ -230,6 +231,8 @@ class Genetic_Algorithm():
         best_fitness = max(fitness_list)
 
         for generation in range(self.n_iter):
+
+            # self.sigma = 0.2 * (1 - generation/self.n_iter)
 
             # Crear nueva generación y calcular su fitness
             children = self.create_children(fitness_list)
