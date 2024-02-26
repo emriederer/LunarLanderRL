@@ -179,8 +179,11 @@ class Genetic_Algorithm():
     #############################
 
     def plot_evolution(self, fitness_history):
-        plt.plot(fitness_history['best'], label='Best Fitness')
-        plt.plot(fitness_history['mean'], label='Mean Fitness')
+        plt.fill_between(range(len(fitness_history['best'])), fitness_history['min'],
+                         fitness_history['best'], color='skyblue', alpha=0.4, label='Range of Solutions')
+        plt.plot(fitness_history['best'], label='Best Fitness', color='blue')
+        plt.plot(fitness_history['mean'], label='Mean Fitness', color='red')
+
         plt.xlabel('Generation')
         plt.ylabel('Fitness')
         plt.title('Fitness Evolution Over Generations')
@@ -221,7 +224,7 @@ class Genetic_Algorithm():
         fitness_list = [self.fitness(chromosome) for chromosome in self.pop]
 
         fitness_history = {'best': [max(fitness_list)], 'mean': [
-            np.mean(fitness_list)]}
+            np.mean(fitness_list)], 'min': [min(fitness_list)]}
 
         best_chromosome = self.pop[np.argmax(fitness_list)]
         best_fitness = max(fitness_list)
@@ -241,6 +244,7 @@ class Genetic_Algorithm():
             # Registra el mejor fitness y el fitness promedio
             fitness_history['best'].append(max(fitness_list))
             fitness_history['mean'].append(np.mean(fitness_list))
+            fitness_history['min'].append(min(fitness_list))
 
             if max(fitness_list) > best_fitness:
                 best_chromosome = self.pop[np.argmax(fitness_list)]
