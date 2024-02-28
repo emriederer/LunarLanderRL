@@ -7,7 +7,8 @@ import collections # For dequeue for the memory buffer
 import random
 import dill as pickle # For storing the buffer state
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 class MemoryBuffer(object):
     def __init__(self, max_size):
