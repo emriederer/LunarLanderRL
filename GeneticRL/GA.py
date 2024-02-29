@@ -73,6 +73,22 @@ class Genetic_Algorithm():
     ######    CROSSOVER    ######
     #############################
 
+    def crossover_real(self, parent1, parent2):
+        """Realiza un crossover entre dos padres usando NumPy."""
+        #! DO NOT USE
+        if random.random() < self.pcross:
+            beta = random.random()
+            parent1 = np.array(parent1)
+            parent2 = np.array(parent2)
+            child1 = beta * parent1 + (1 - beta) * parent2
+            child2 = (1 - beta) * parent1 + beta * parent2
+            # Convertir de nuevo a listas si es necesario
+            child1, child2 = child1.tolist(), child2.tolist()
+        else:
+            child1, child2 = parent1, parent2
+
+        return child1, child2
+
     def crossover_one_point(self, parent1, parent2):
         """Realiza un crossover entre dos padres."""
 
@@ -100,7 +116,7 @@ class Genetic_Algorithm():
     def crossover(self, parent1, parent2):
         """Realiza un crossover entre dos padres."""
 
-        return random.choice([self.crossover_one_point])(
+        return random.choice([self.crossover_real])(
             parent1, parent2)
 
     #############################
